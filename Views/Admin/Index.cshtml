@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Admin | Dashboard";
+
+    ERPSystemTimologio.EF.User sessionUser = null;
+
+    if (Session["user"] != null)
+    {
+        sessionUser = (ERPSystemTimologio.EF.User)Session["user"];
+    }
+}
+
+
+<h1>Welcome @sessionUser.Name</h1>
