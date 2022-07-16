@@ -1,0 +1,29 @@
+﻿@{ 
+    ERPSystemTimologio.EF.User sessionUser = null;
+
+    if(Session["user"] != null)
+    {
+        sessionUser = (ERPSystemTimologio.EF.User)Session["user"];
+    }
+}
+<div class="animate-100 d-md-block list-group mb-3">
+    @if (sessionUser != null && sessionUser.Type == 1)
+    {
+        <a href="" class="list-group-item list-group-item-action">Verify User</a>
+        <a href="" class="list-group-item list-group-item-action">View Users</a>
+        <a href="" class="list-group-item list-group-item-action">Add User</a>
+        <a href="" class="list-group-item list-group-item-action">Add Permission</a>
+    }
+    else if (sessionUser != null && sessionUser.Type == 2)
+    {
+        <a href="" class="list-group-item list-group-item-action"></a>
+    }
+    else if (sessionUser != null && sessionUser.Type == 3)
+    {
+        <a href="" class="list-group-item list-group-item-action"></a>
+    }
+    else if (sessionUser != null && sessionUser.Type == 4)
+    {
+        <a href="" class="list-group-item list-group-item-action"></a>
+    }
+</div>

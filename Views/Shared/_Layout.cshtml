@@ -1,31 +1,99 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/css/bootstrap-icons.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")">
 </head>
+
 <body>
-    <header class="container">
-        <nav>
-            <ul>
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            </ul>
-        </nav>
+    <header class=" @(Session["loggedin"] != null && Session["loggedin"].ToString().Equals("True") ? "d-lg-block" : "d-md-block") container-fluid bg-success p-3">
+        <div class="row">
+            <div class="col-12 col-md-3 text-center text-md-start">
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand-md h2 text-decoration-none text-white"><i class="bi bi-life-preserver text-white display-5"></i></a>
+                @if (Session["loggedin"] != null && Session["loggedin"].ToString().Equals("True") && Session["user"] != null)
+                {
+                    ERPSystemTimologio.EF.User _sessionUser = (ERPSystemTimologio.EF.User)(Session["user"]);
+
+                    <div>
+                        <span class="text-white fs-6">Logged in <a href="#" class="badge badge-danger">@(_sessionUser.Username)</a> as @(_sessionUser.Type == 0 ? "System Admin" : (_sessionUser.Type == 1 ? "CEO" : (_sessionUser.Type == 2 ? "Regional Manager" : (_sessionUser.Type == 3 ? "Branch Manager" : (_sessionUser.Type == 4 ? "Employee" : "")))))</span>
+                    </div>
+                }
+            </div>
+            <div class="col-12 col-md-9 d-flex justify-content-center align-items-center">
+                @RenderPage("_PrimaryMenu.cshtml")
+            </div>
+        </div>
     </header>
 
-    <main class="container">
-        @RenderBody()
+    <main class="container-fluid py-2 my-3 border">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">@ViewBag.Title Page</h1>
+            </div>
+        </div>
+        <hr>
+
+        @if (TempData["error_message"] != null && TempData["error_message"].ToString().Length != 0)
+        {
+            <div class="col-12">
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mr-2"></i>
+                    <div>
+                        <strong>@TempData["error_message"]</strong>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (TempData["success_message"] != null && TempData["success_message"].ToString().Length != 0)
+        {
+            <div class="col-12">
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <i class="bi bi-check-circle-fill flex-shrink-0 mr-2"></i>
+                    <div>
+                        <strong>@TempData["error_message"]</strong>
+                    </div>
+                </div>
+            </div>
+        }
+
+    <div class="row d-flex justify-content-center">
+        @if (Session["loggedin"] != null && Session["loggedin"].ToString().Equals("True"))
+        {
+            <div class="col-12 col-md-3">
+                @RenderPage("_SideMenu.cshtml")
+            </div>
+        }
+
+        <div class="col-12 col-md-@(Session["loggedin"] != null && Session["loggedin"].ToString().Equals("True") ? "9" : "12")">
+            @RenderBody()
+        </div>
+    </div>
     </main>
 
-    <footer class="container">
-        <p>&copy; @DateTime.Now.Year - all reserved by Timologio</p>
+    <footer class="container-fluid bg-success p-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="text-white mb-0">
+                    <span class="text-white">
+                        @DateTime.Now.Year &copy; Copyright by <strong>@Html.ActionLink("Group 08", "About", "Home", null, new { @class = "list-group-item d-inline text-dark rounded p-1" })</strong>                        
+                    </span>
+                </p>
+            </div>
+        </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <script src="@Url.Content("~/Content/bootstrap/js/jquery.slim.min.js")"></script>
+    <script src="@Url.Content("~/Content/bootstrap/js/popper.min.js")"></script>
+    <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/script.js")"></script>
 </body>
+
 </html>

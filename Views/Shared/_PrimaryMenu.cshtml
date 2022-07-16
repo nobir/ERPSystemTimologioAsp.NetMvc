@@ -1,0 +1,32 @@
+﻿<ul class="nav d-flex flex-column w-100 h-100 @( Session["loggedin"] != null && Session["loggedin"].ToString().Equals("true") ? "flex-lg-row justify-content-lg-end align-items-lg-center" : "flex-md-row justify-content-md-end align-items-md-center" )">
+    @if (Session["loggedin"] != null && Session["loggedin"].ToString().Equals("True"))
+    {
+        <li class="list-group m-1">
+            @Html.ActionLink("Dashboard", "Index", "Dashboard", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("View Profile", "ViewProfile", "Dashboard", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("Edit Profile", "EditProfile", "Dashboard", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("Change Password", "ChangePassword", "Dashboard", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+    }
+    else
+    {
+        <li class="list-group m-1">
+            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+        <li class="list-group m-1">
+            @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link list-group-item text-dark rounded" })
+        </li>
+    }
+</ul>
