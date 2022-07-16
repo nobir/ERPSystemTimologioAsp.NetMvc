@@ -128,14 +128,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Auth\IsAdmin.cs" />
+    <Compile Include="Auth\LoggedIn.cs" />
+    <Compile Include="Auth\NotLoggedIn.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="EF\Address.cs">
       <DependentUpon>Timologio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Category.cs">
+    <Compile Include="EF\Branch.cs">
       <DependentUpon>Timologio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\CategoryInvoice.cs">
+    <Compile Include="EF\Category.cs">
       <DependentUpon>Timologio.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Customer.cs">
@@ -153,7 +158,10 @@
     <Compile Include="EF\Permission.cs">
       <DependentUpon>Timologio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\Station.cs">
+    <Compile Include="EF\Region.cs">
+      <DependentUpon>Timologio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sysdiagram.cs">
       <DependentUpon>Timologio.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Timologio.Context.cs">
@@ -186,17 +194,30 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-icons.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\js\jquery.slim.min.js" />
+    <Content Include="Content\bootstrap\js\popper.min.js" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\images\default-user-avatar.png" />
+    <Content Include="Content\js\script.js" />
     <Content Include="EF\Timologio.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Timologio.Context.cs</LastGenOutput>
       <DependentUpon>Timologio.edmx</DependentUpon>
+      <LastGenOutput>Timologio.Context.cs</LastGenOutput>
     </Content>
     <Content Include="EF\Timologio.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -204,11 +225,21 @@
       <LastGenOutput>Timologio.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap\fonts\bootstrap-icons.woff" />
+    <Content Include="Content\bootstrap\fonts\bootstrap-icons.woff2" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js.map" />
     <EntityDeploy Include="EF\Timologio.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Timologio.Designer.cs</LastGenOutput>
@@ -240,20 +271,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Shared\_PrimaryMenu.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_SideMenu.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
