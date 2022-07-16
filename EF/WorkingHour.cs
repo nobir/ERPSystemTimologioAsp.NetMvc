@@ -16,8 +16,8 @@ namespace ERPSystemTimologio.EF
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
-        public Nullable<System.TimeSpan> EntryTime { get; set; }
-        public Nullable<System.TimeSpan> ExitTime { get; set; }
+        public System.DateTime EntryTime { get; set; }
+        public Nullable<System.DateTime> ExitTime { get; set; }
         public int UserId { get; set; }
     
         public virtual User User { get; set; }

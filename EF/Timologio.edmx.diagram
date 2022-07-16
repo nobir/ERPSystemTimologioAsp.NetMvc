@@ -4,35 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="177002faf22a4b96a88943662f179d11" Name="Diagram1">
-        <EntityTypeShape EntityType="TimologioModel.Address" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Category" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.CategoryInvoice" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Customer" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Inventory" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Invoice" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Payment" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Permission" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.Station" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.User" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.VacationDetail" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.WorkingHour" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimologioModel.WorkPost" Width="1.5" PointX="10.5" PointY="13" IsExpanded="true" />
+      <Diagram DiagramId="f576c77951ac4e4f98dce14ebc2316b4" Name="Diagram1">
+        <EntityTypeShape EntityType="TimologioModel.Address" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Branch" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Category" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Customer" Width="1.5" PointX="13.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Inventory" Width="1.5" PointX="7.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Invoice" Width="1.5" PointX="15.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Payment" Width="1.5" PointX="12.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Permission" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.Region" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.User" Width="1.5" PointX="10.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.VacationDetail" Width="1.5" PointX="12.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.WorkingHour" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimologioModel.WorkPost" Width="1.5" PointX="12.75" PointY="19.625" IsExpanded="true" />
+        <AssociationConnector Association="TimologioModel.FK_Branches_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.FK_Regions_Addresses" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_Users_Addresses" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_CategoryInvoice_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.FK_Branches_Regions" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.FK_Inventories_Branches" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.FK_Users_Branches" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_Inventories_Categories" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_CategoryInvoice_Invoices" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_Invoices_Customers" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_Inventories_Stations" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_Invoices_Stations" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_Invoices_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_Payments_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_Permissions_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_Stations_Users" ManuallyRouted="false" />
-        <AssociationConnector Association="TimologioModel.FK_WorkPosts_Stations" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.FK_Users_Regions" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_VacationDetails_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_WorkingHours_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TimologioModel.FK_WorkPosts_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.CategoryInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="TimologioModel.PermissionUser" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

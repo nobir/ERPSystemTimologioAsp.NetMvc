@@ -16,10 +16,10 @@ namespace ERPSystemTimologio.EF
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public int StationId { get; set; }
+        public int BranchId { get; set; }
         public int CategoryId { get; set; }
     
+        public virtual Branch Branch { get; set; }
         public virtual Category Category { get; set; }
-        public virtual Station Station { get; set; }
     }
 }

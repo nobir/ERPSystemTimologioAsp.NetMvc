@@ -11,7 +11,8 @@ namespace ERPSystemTimologio.EF
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,15 +20,15 @@ namespace ERPSystemTimologio.EF
         {
             this.Invoices = new HashSet<Invoice>();
             this.Payments = new HashSet<Payment>();
-            this.Permissions = new HashSet<Permission>();
-            this.Stations = new HashSet<Station>();
             this.VacationDetails = new HashSet<VacationDetail>();
             this.WorkingHours = new HashSet<WorkingHour>();
             this.WorkPosts = new HashSet<WorkPost>();
+            this.Permissions = new HashSet<Permission>();
         }
     
         public int Id { get; set; }
         public int Verified { get; set; }
+        public int VerifyEmail { get; set; }
         public string Username { get; set; }
         public int Type { get; set; }
         public int Status { get; set; }
@@ -36,22 +37,25 @@ namespace ERPSystemTimologio.EF
         public string Password { get; set; }
         public Nullable<double> Salary { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
+        public string Avatar { get; set; }
         public int AddressId { get; set; }
+        public Nullable<int> RegionId { get; set; }
+        public Nullable<int> BranchId { get; set; }
     
         public virtual Address Address { get; set; }
+        public virtual Branch Branch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Invoice> Invoices { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payment> Payments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Permission> Permissions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Station> Stations { get; set; }
+        public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VacationDetail> VacationDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkingHour> WorkingHours { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkPost> WorkPosts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

@@ -12,22 +12,25 @@ namespace ERPSystemTimologio.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Invoice
+    public partial class Branch
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Invoice()
+        public Branch()
         {
-            this.Categories = new HashSet<Category>();
+            this.Inventories = new HashSet<Inventory>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
-        public System.DateTime Date { get; set; }
-        public int CutomerId { get; set; }
-        public int UserId { get; set; }
+        public string Name { get; set; }
+        public int RegionId { get; set; }
+        public int AddressId { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual User User { get; set; }
+        public virtual Address Address { get; set; }
+        public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

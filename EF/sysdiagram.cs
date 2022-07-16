@@ -12,13 +12,12 @@ namespace ERPSystemTimologio.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class CategoryInvoice
+    public partial class sysdiagram
     {
-        public int Id { get; set; }
-        public int CategoryId { get; set; }
-        public int InvoiceId { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Invoice Invoice { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

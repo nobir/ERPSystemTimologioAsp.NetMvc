@@ -18,9 +18,7 @@ namespace ERPSystemTimologio.EF
         public System.DateTime JoiningDate { get; set; }
         public Nullable<System.DateTime> LeaveDate { get; set; }
         public int UserId { get; set; }
-        public int StationId { get; set; }
     
-        public virtual Station Station { get; set; }
         public virtual User User { get; set; }
     }
 }

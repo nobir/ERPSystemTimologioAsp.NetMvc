@@ -17,21 +17,21 @@ namespace ERPSystemTimologio.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.CategoryInvoices = new HashSet<CategoryInvoice>();
             this.Inventories = new HashSet<Inventory>();
+            this.Invoices = new HashSet<Invoice>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Details { get; set; }
-        public double Size { get; set; }
+        public int Size { get; set; }
         public double CostPrice { get; set; }
         public double SellPrice { get; set; }
         public double Discount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryInvoice> CategoryInvoices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory> Inventories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

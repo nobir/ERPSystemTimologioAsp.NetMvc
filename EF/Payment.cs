@@ -18,7 +18,7 @@ namespace ERPSystemTimologio.EF
         public System.DateTime IssueDate { get; set; }
         public Nullable<System.DateTime> ReceiveDate { get; set; }
         public double Bonus { get; set; }
-        public Nullable<int> UserId { get; set; }
+        public int UserId { get; set; }
     
         public virtual User User { get; set; }
     }

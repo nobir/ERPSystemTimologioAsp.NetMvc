@@ -14,7 +14,14 @@ namespace ERPSystemTimologio.EF
     
     public partial class Permission
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Permission()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public int Id { get; set; }
+        public string Name { get; set; }
         public int InvoiceAdd { get; set; }
         public int InvoiceManage { get; set; }
         public int InventoryManage { get; set; }
@@ -22,9 +29,9 @@ namespace ERPSystemTimologio.EF
         public int StationManage { get; set; }
         public int OperationManage { get; set; }
         public int UserManage { get; set; }
-        public int PermissionMange { get; set; }
-        public int UserId { get; set; }
+        public int PermissionManage { get; set; }
     
-        public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

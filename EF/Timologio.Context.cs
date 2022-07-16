@@ -26,14 +26,15 @@ namespace ERPSystemTimologio.EF
         }
     
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryInvoice> CategoryInvoices { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
-        public virtual DbSet<Station> Stations { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VacationDetail> VacationDetails { get; set; }
         public virtual DbSet<WorkingHour> WorkingHours { get; set; }
