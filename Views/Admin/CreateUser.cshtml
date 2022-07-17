@@ -1,0 +1,418 @@
+﻿@model ERPSystemTimologio.Models.UserCreateAdminModel
+@{
+    ViewBag.Title = "Create User";
+}
+
+<form id="create-user-form" action="@Url.Action("CreateUser", "Admin")" method="post" class="needs-validation">
+    <div class="row mb-3 has-validation">
+        <label for="verified" class="col-sm-3 col-form-label">Verified</label>
+        <div class="col-sm-9">
+            <input id="verified"
+                   type="text"
+                   name="Verified"
+                   class="@(!ViewData.ModelState.IsValidField("Verified") ? "is-invalid" : "") form-control @(Model != null && Model.Verified != null && ViewData.ModelState.IsValidField("Verified") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Verified != null ? Model.Verified.ToString() : "0")"
+                   placeholder="0">
+
+            @if (!ViewData.ModelState.IsValidField("Verified"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Verified")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="name" class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+            <input id="name"
+                   type="text"
+                   name="Name"
+                   class="@(!ViewData.ModelState.IsValidField("Name") ? "is-invalid" : "") form-control @(Model != null && Model.Name != null && ViewData.ModelState.IsValidField("Name") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Name != null ? Model.Name : "")"
+                   placeholder="Jhon Doe">
+
+            @if (!ViewData.ModelState.IsValidField("Name"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Name")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="username" class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-9">
+            <input id="username"
+                   type="text"
+                   name="Username"
+                   class="@(!ViewData.ModelState.IsValidField("Username") ? "is-invalid" : "") form-control @(Model != null && Model.Username != null && ViewData.ModelState.IsValidField("Username") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Username != null ? Model.Username : "")"
+                   placeholder="nobir">
+
+            @if (!ViewData.ModelState.IsValidField("Username"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Username")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="email" class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+            <input id="email"
+                   type="text"
+                   name="Email"
+                   class="@(!ViewData.ModelState.IsValidField("Email") ? "is-invalid" : "") form-control @(Model != null && Model.Email != null && ViewData.ModelState.IsValidField("Email") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Email != null ? Model.Email : "")"
+                   placeholder="sasuke@uchiha.com">
+
+            @if (!ViewData.ModelState.IsValidField("Email"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Email")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="salary" class="col-sm-3 col-form-label">Salary</label>
+        <div class="col-sm-9">
+            <input id="salary"
+                   type="text"
+                   name="Salary"
+                   class="@(!ViewData.ModelState.IsValidField("Salary") ? "is-invalid" : "") form-control @(Model != null && Model.Salary != null && ViewData.ModelState.IsValidField("Salary") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Salary != null ? Model.Salary.ToString() : "")"
+                   placeholder="90000">
+
+            @if (!ViewData.ModelState.IsValidField("Salary"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Salary")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="password" class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+            <input id="password"
+                   type="password"
+                   name="Password"
+                   class="@(!ViewData.ModelState.IsValidField("Password") ? "is-invalid" : "") form-control @(Model != null && Model.Password != null && ViewData.ModelState.IsValidField("Password") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Password != null ? Model.Password.ToString() : "")"
+                   placeholder="">
+
+            @if (!ViewData.ModelState.IsValidField("Password"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Password")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="cpassword" class="col-sm-3 col-form-label">Confirm Password</label>
+        <div class="col-sm-9">
+            <input id="cpassword"
+                   type="password"
+                   name="CPassword"
+                   class="@(!ViewData.ModelState.IsValidField("CPassword") ? "is-invalid" : "") form-control @(Model != null && Model.CPassword != null && ViewData.ModelState.IsValidField("CPassword") ? "is-valid" : "")"
+                   value="@(Model != null && Model.CPassword != null ? Model.CPassword.ToString() : "")"
+                   placeholder="">
+
+            @if (!ViewData.ModelState.IsValidField("CPassword"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("CPassword")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="type" class="col-sm-3 col-form-label">User Type</label>
+        <div class="col-sm-9">
+            <select id="type"
+                    class="@(!ViewData.ModelState.IsValidField("Type") ? "is-invalid" : "") form-control @(Model != null && Model.Type != null && ViewData.ModelState.IsValidField("Type") ? "is-valid" : "")"
+                    name="Type">
+
+                <option value="">None</option>
+                <option value="4" @(Model != null && Model.Type != null && Model.Type == 4 ? "selected" : "")>Employee</option>
+                <option value="3" @(Model != null && Model.Type != null && Model.Type == 3 ? "selected" : "")>Branch Manager</option>
+                <option value="2" @(Model != null && Model.Type != null && Model.Type == 2 ? "selected" : "")>Regional Manager</option>
+                <option value="1" @(Model != null && Model.Type != null && Model.Type == 1 ? "selected" : "")>CEO</option>
+            </select>
+
+            @if (!ViewData.ModelState.IsValidField("Type"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Type")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="hire_date" class="col-sm-3 col-form-label">Hire Date</label>
+        <div class="col-sm-9">
+            <input id="hire_date"
+                   type="date"
+                   name="HireDate"
+                   class="@(!ViewData.ModelState.IsValidField("HireDate") ? "is-invalid" : "") form-control @(Model != null && Model.HireDate != null && ViewData.ModelState.IsValidField("HireDate") ? "is-valid" : "")"
+                   value="@(Model != null && Model.HireDate != null ? Convert.ToDateTime(Model.HireDate).ToString("yyyy-MM-dd") : "")"
+                   placeholder="">
+
+            @if (!ViewData.ModelState.IsValidField("HireDate"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("HireDate")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="region_id" class="col-sm-3 col-form-label">Region</label>
+        <div class="col-sm-9">
+            <select id="region_id"
+                    class="@(!ViewData.ModelState.IsValidField("RegionId") ? "is-invalid" : "") form-control @(Model != null && Model.RegionId != null && ViewData.ModelState.IsValidField("RegionId") ? "is-valid" : "")"
+                    name="RegionId">
+
+                <option value="">None</option>
+
+                @foreach (ERPSystemTimologio.EF.Region region in ViewBag.Regions)
+                {
+                    <option value="@(region.Id)" @(Model != null && Model.RegionId != null && Model.RegionId == region.Id ? "selected" : "")>@region.Name</option>
+                }
+            </select>
+            @if (!ViewData.ModelState.IsValidField("RegionId"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("RegionId")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="branch_id" class="col-sm-3 col-form-label">Branch</label>
+        <div class="col-sm-9">
+            <select id="branch_id"
+                    class="@(!ViewData.ModelState.IsValidField("BranchId") ? "is-invalid" : "") form-control @(Model != null && Model.BranchId != null && ViewData.ModelState.IsValidField("BranchId") ? "is-valid" : "")"
+                    name="BranchId">
+
+                <option value="">None</option>
+
+                @foreach (ERPSystemTimologio.EF.Branch branch in ViewBag.Branches)
+                {
+                    <option value="@(branch.Id)" @(Model != null && Model.BranchId != null && Model.BranchId == branch.Id ? "selected" : "")>@branch.Name</option>
+                }
+            </select>
+            @if (!ViewData.ModelState.IsValidField("BranchId"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("BranchId")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+
+    <div class="row mb-3 has-validation">
+        <div class="d-none" id="hidden-permission-list">
+            <div class="col-sm-8 mb-2">
+                <select id="permission_ids"
+                        class="form-control"
+                        name="PermissionIds[]">
+
+                    <option value="">None</option>
+
+                    @foreach (ERPSystemTimologio.EF.Permission permission in ViewBag.Permissions)
+                    {
+                        <option value="@permission.Id">@permission.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-4 mb-2 remove-btn-container" id="remove-btn-container">
+                <a id="permission-remove-btn" href="#" class="btn btn-danger permission-remove-btn">
+                    <i class="bi bi-dash-circle mr-2"></i>Remove
+                </a>
+            </div>
+        </div>
+
+        <label for="permission_id" class="col-sm-3 col-form-label">Permission</label>
+        <div class="col-sm-7">
+            <div id="permissions" class="row">
+                @{
+                    int count = 0;
+                }
+
+                @if (Model != null && Model.PermissionIds.Count() > 0)
+                {
+                    foreach (int permissionId in Model.PermissionIds)
+                    {
+                        { count++; }
+                        <div class="col-sm-8 mb-2">
+                            <select id="permission_id"
+                                    class="form-control @(!ViewData.ModelState.IsValidField("PermissionIds") ? "is-invalid" : "")"
+                                    name="PermissionIds[]">
+                                <option value="">None</option>
+                                @foreach (ERPSystemTimologio.EF.Permission _permission in ViewBag.Permissions)
+                                {
+                                    <option value="@_permission.Id" @(permissionId == _permission.Id ? "selected" : "")>@_permission.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                        if (count > 1)
+                        {
+                            <div class="col-sm-4 mb-2 remove-btn-container" id="remove-btn-container">
+                                <a id="permission-remove-btn" href="#"
+                                   class="btn btn-danger permission-remove-btn">
+                                    <i class="bi bi-dash-circle mr-2"></i>Remove
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="col-sm-8 mb-2">
+                        <select id="permission_id"
+                                class="form-control @(!ViewData.ModelState.IsValidField("PermissionIds") ? "is-invalid" : "")"
+                                name="PermissionIds[]">
+                            <option value="">None</option>
+                            @foreach (ERPSystemTimologio.EF.Permission permission in ViewBag.Permissions)
+                            {
+                                <option value="@permission.Id">@permission.Name</option>
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+
+            @if (!ViewData.ModelState.IsValidField("PermissionIds"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("PermissionIds")</strong>
+                </span>
+            }
+        </div>
+        <div class="col-sm-2">
+            <a id="permission-add-btn" href="#" class="btn btn-info">
+                <i class="bi bi-plus-circle mr-2"></i>Add
+            </a>
+        </div>
+    </div>
+
+
+
+    <div class="row mb-3 has-validation">
+        <label for="local_address" class="col-sm-3 col-form-label">Local Address</label>
+        <div class="col-sm-9">
+            <input id="local_address"
+                   type="text"
+                   name="LocalAddress"
+                   class="@(!ViewData.ModelState.IsValidField("LocalAddress") ? "is-invalid" : "") form-control @(Model != null && Model.LocalAddress != null && ViewData.ModelState.IsValidField("LocalAddress") ? "is-valid" : "")"
+                   value="@(Model != null && Model.LocalAddress != null ? Model.LocalAddress : "")"
+                   placeholder="Uttara">
+
+            @if (!ViewData.ModelState.IsValidField("LocalAddress"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("LocalAddress")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="police_station" class="col-sm-3 col-form-label">Police Station</label>
+        <div class="col-sm-9">
+            <input id="police_station"
+                   type="text"
+                   name="PoliceStation"
+                   class="@(!ViewData.ModelState.IsValidField("PoliceStation") ? "is-invalid" : "") form-control @(Model != null && Model.PoliceStation != null && ViewData.ModelState.IsValidField("PoliceStation") ? "is-valid" : "")"
+                   value="@(Model != null && Model.PoliceStation != null ? Model.PoliceStation : "")"
+                   placeholder="Uttara">
+
+            @if (!ViewData.ModelState.IsValidField("PoliceStation"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("PoliceStation")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="city" class="col-sm-3 col-form-label">City</label>
+        <div class="col-sm-9">
+            <input id="city"
+                   type="text"
+                   name="City"
+                   class="@(!ViewData.ModelState.IsValidField("City") ? "is-invalid" : "") form-control @(Model != null && Model.City != null && ViewData.ModelState.IsValidField("City") ? "is-valid" : "")"
+                   value="@(Model != null && Model.City != null ? Model.City : "")"
+                   placeholder="Dhaka">
+
+            @if (!ViewData.ModelState.IsValidField("City"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("City")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="country" class="col-sm-3 col-form-label">Country</label>
+        <div class="col-sm-9">
+            <input id="country"
+                   type="text"
+                   name="Country"
+                   class="@(!ViewData.ModelState.IsValidField("Country") ? "is-invalid" : "") form-control @(Model != null && Model.Country != null && ViewData.ModelState.IsValidField("Country") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Country != null ? Model.Country : "")"
+                   placeholder="Bangladesh">
+
+            @if (!ViewData.ModelState.IsValidField("Country"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Country")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3 has-validation">
+        <label for="zip_code" class="col-sm-3 col-form-label">Zip Code</label>
+        <div class="col-sm-9">
+            <input id="zip_code"
+                   type="text"
+                   name="ZipCode"
+                   class="@(!ViewData.ModelState.IsValidField("ZipCode") ? "is-invalid" : "") form-control @(Model != null && Model.ZipCode != null && ViewData.ModelState.IsValidField("ZipCode") ? "is-valid" : "")"
+                   value="@(Model != null && Model.ZipCode != null ? Model.ZipCode : "")"
+                   placeholder="1230">
+
+            @if (!ViewData.ModelState.IsValidField("ZipCode"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("ZipCode")</strong>
+                </span>
+            }
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-9 offset-sm-3">
+            <button id="create-user-btn" type="submit" class="btn btn-success">Add</button>
+        </div>
+    </div>
+</form>
