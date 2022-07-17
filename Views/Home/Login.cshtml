@@ -8,7 +8,7 @@
     <div class="row mb-3 has-validation">
         <label for="email" class="col-sm-3 col-form-label">Email</label>
         <div class="col-sm-9">
-            <input id="email" type="text" name="Email" class="@(!ViewData.ModelState.IsValidField("Email") ? "is-invalid" : "") form-control {{ @(Model != null && ViewData.ModelState.IsValidField("Email") ? "is-valid" : "")" value="@(Model != null ? Model.Email : "")" placeholder="sasuke@uchiha.com">
+            <input id="email" type="text" name="Email" class="@(!ViewData.ModelState.IsValidField("Email") ? "is-invalid" : "") form-control @(Model != null && ViewData.ModelState.IsValidField("Email") ? "is-valid" : "")" value="@(Model != null ? Model.Email : "")" placeholder="sasuke@uchiha.com">
 
             @if (!ViewData.ModelState.IsValidField("Email"))
             {
