@@ -9,10 +9,10 @@
 <div class="animate-100 d-md-block list-group mb-3">
     @if (sessionUser != null && sessionUser.Type == 1)
     {
-        <a href="" class="list-group-item list-group-item-action">Verify User</a>
-        <a href="" class="list-group-item list-group-item-action">View Users</a>
-        <a href="" class="list-group-item list-group-item-action">Add User</a>
-        <a href="" class="list-group-item list-group-item-action">Add Permission</a>
+        @Html.ActionLink("Verify Users", "ViewUnverifiedUsers", "Admin", null, new { @class = "list-group-item list-group-item-action" })
+        @Html.ActionLink("View Users", "ViewVerifiedUsers", "Admin", null, new { @class = "list-group-item list-group-item-action" })
+        @Html.ActionLink("Add User", "CreateUser", "Admin", null, new { @class = "list-group-item list-group-item-action" })
+        @Html.ActionLink("Add Permission", "CreatePermission", "Admin", null, new { @class = "list-group-item list-group-item-action" })
     }
     else if (sessionUser != null && sessionUser.Type == 2)
     {
