@@ -279,6 +279,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
     <Content Include="Views\Admin\ViewVerifiedUsers.cshtml" />
+    <Content Include="Views\Admin\ViewUnverifiedUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
