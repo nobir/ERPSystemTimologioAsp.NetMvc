@@ -9,7 +9,7 @@ using ERPSystemTimologio.Models;
 
 namespace ERPSystemTimologio.Controllers
 {
-    [LoggedIn, IsAdmin]
+    //[LoggedIn, IsAdmin]
     public class AdminController : Controller
     {
         private readonly TimologioEntities db = new TimologioEntities();
@@ -53,6 +53,83 @@ namespace ERPSystemTimologio.Controllers
             TempData["success_message"] = "Successfully created Permission";
 
             return RedirectToAction("CreatePermission", "Admin");
+        }
+
+        [HttpGet]
+        public ActionResult EditPermission(int id)
+        {
+            //if(id != null)
+            //{
+            //    TempData["error_message"] = "Invalid Permission Id";
+            //    return RedirectToAction("ViewPermissions", "Admin");
+            //}
+
+            var permission = db.Permissions.Where(p => p.Id == id).SingleOrDefault();
+
+            if(permission == null)
+            {
+                TempData["error_message"] = "Permission not found";
+
+                return RedirectToAction("ViewPermissions", "Admin");
+            }
+
+            var _permission = new PermissionEditAdminModel
+            {
+                Id = permission.Id,
+                Name = permission.Name,
+                InvoiceAdd = permission.InvoiceAdd == 1 ? "InvoiceAdd" : "",
+                InvoiceManage = permission.InvoiceManage == 1 ? "InvoiceManage" : "",
+                InventoryManage = permission.InventoryManage == 1 ? "InventoryManage" : "",
+                CategoryManage = permission.CategoryManage == 1 ? "CategoryManage" : "",
+                StationManage = permission.StationManage == 1 ? "StationManage" : "",
+                OperationManage = permission.OperationManage == 1 ? "OperationManage" : "",
+                UserManage = permission.UserManage == 1 ? "UserManage" : "",
+                PermissionManage = permission.PermissionManage == 1 ? "PermissionManage" : "",
+            };
+
+            return View(_permission);
+        }
+
+        [HttpPost]
+        public ActionResult EditPermission(PermissionEditAdminModel _permission, int id)
+        {
+            //if (id != null)
+            //{
+            //    TempData["error_message"] = "Invalid Permission Id";
+            //    return RedirectToAction("ViewPermissions", "Admin");
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                TempData["error_message"] = "Permission not found";
+
+                return RedirectToAction("EditPermission", "Admin", new { id });
+            }
+
+            var permission = this.db.Permissions.Where(p => p.Id == id).SingleOrDefault();
+
+            if (permission == null)
+            {
+                TempData["error_message"] = "Permission not found";
+
+                return RedirectToAction("ViewPermissions", "Admin");
+            }
+
+            permission.Name = _permission.Name;
+            permission.InvoiceAdd = _permission.InvoiceAdd != null && _permission.InvoiceAdd.Equals("InvoiceAdd") ? 1 : 0;
+            permission.InvoiceManage = _permission.InvoiceManage != null && _permission.InvoiceManage.Equals("InvoiceManage") ? 1 : 0;
+            permission.InventoryManage = _permission.InventoryManage != null && _permission.InventoryManage.Equals("InventoryManage") ? 1 : 0;
+            permission.CategoryManage = _permission.CategoryManage != null && _permission.CategoryManage.Equals("CategoryManage") ? 1 : 0;
+            permission.StationManage = _permission.StationManage != null && _permission.StationManage.Equals("StationManage") ? 1 : 0;
+            permission.OperationManage = _permission.OperationManage != null && _permission.OperationManage.Equals("OperationManage") ? 1 : 0;
+            permission.UserManage = _permission.UserManage != null && _permission.UserManage.Equals("UserManage") ? 1 : 0;
+            permission.PermissionManage = _permission.PermissionManage != null && _permission.PermissionManage.Equals("PermissionManage") ? 1 : 0;
+
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully updated permission.";
+
+            return RedirectToAction("EditPermission", "Admin", new { id });
         }
 
         public ActionResult VerifyUser(int id)

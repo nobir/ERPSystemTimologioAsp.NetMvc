@@ -1,0 +1,107 @@
+﻿@model ERPSystemTimologio.Models.PermissionEditAdminModel
+@{
+    ViewBag.Title = "Edit Permission";
+}
+
+<form id="edit-permission-form" action="@(Url.Action("EditPermission", "Admin", new { id = Model.Id}))"
+      method="post" class="needs-validation">
+    <div class="row mb-3 has-validation">
+        <label for="name" class="col-sm-3 col-form-label">Permission Name</label>
+        <div class="col-sm-9">
+            <input id="name"
+                   type="text"
+                   name="Name"
+                   class="@(!ViewData.ModelState.IsValidField("Name") ? "is-invalid" : "") form-control @(Model != null && Model.Name != null && ViewData.ModelState.IsValidField("Name") ? "is-valid" : "")"
+                   value="@(Model != null && Model.Name != null ? Model.Name.ToString() : "")"
+                   placeholder="e.g Admin">
+
+            @if (!ViewData.ModelState.IsValidField("Name"))
+            {
+                <span class="invalid-feedback" role="alert">
+                    <strong>@Html.ValidationMessage("Name")</strong>
+                </span>
+            }
+        </div>
+    </div>
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-3 pt-0">Permission:</legend>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="invoice_add" type="checkbox" name="InvoiceAdd"
+                       class="form-check-input @(Model != null && Model.InvoiceAdd != null && Model.InvoiceAdd.Equals("InvoiceAdd") && ViewData.ModelState.IsValidField("InvoiceAdd") ? "is-valid" : "")"
+                       value="InvoiceAdd"
+                       @(Model != null && Model.InvoiceAdd != null && Model.InvoiceAdd.Equals("InvoiceAdd") ? "checked" : "" )>
+                <label for="invoice_add" class="form-check-label">Invoice Add</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="invoice_manage" type="checkbox" name="InvoiceManage"
+                       class="form-check-input @(Model != null && Model.InvoiceManage != null && Model.InvoiceManage.Equals("InvoiceManage") && ViewData.ModelState.IsValidField("InvoiceManage") ? "is-valid" : "")"
+                       value="InvoiceManage"
+                       @(Model != null && Model.InvoiceManage != null && Model.InvoiceManage.Equals("InvoiceManage") ? "checked" : "" )>
+                <label for="invoice_manage" class="form-check-label">Invoice Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="inventory_manage" type="checkbox" name="InventoryManage"
+                       class="form-check-input @(Model != null && Model.InventoryManage != null && Model.InventoryManage.Equals("InventoryManage") && ViewData.ModelState.IsValidField("InventoryManage") ? "is-valid" : "")"
+                       value="InventoryManage"
+                       @(Model != null && Model.InventoryManage != null && Model.InventoryManage.Equals("InventoryManage") ? "checked" : "" )>
+                <label for="inventory_manage" class="form-check-label">Inventory Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="category_manage" type="checkbox" name="CategoryManage"
+                       class="form-check-input @(Model != null && Model.CategoryManage != null && Model.CategoryManage.Equals("CategoryManage") && ViewData.ModelState.IsValidField("CategoryManage") ? "is-valid" : "")"
+                       value="CategoryManage"
+                       @(Model != null && Model.CategoryManage != null && Model.CategoryManage.Equals("CategoryManage") ? "checked" : "" )>
+                <label for="category_manage" class="form-check-label">Category Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="station_manage" type="checkbox" name="StationManage"
+                       class="form-check-input @(Model != null && Model.StationManage != null && Model.StationManage.Equals("StationManage") && ViewData.ModelState.IsValidField("StationManage") ? "is-valid" : "")"
+                       value="StationManage"
+                       @(Model != null && Model.StationManage != null && Model.StationManage.Equals("StationManage") ? "checked" : "" )>
+                <label for="station_manage" class="form-check-label">Station Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="operation_manage" type="checkbox" name="OperationManage  "
+                       class="form-check-input @(Model != null && Model.OperationManage != null && Model.OperationManage.Equals("OperationManage") && ViewData.ModelState.IsValidField("OperationManage") ? "is-valid" : "")"
+                       value="OperationManage"
+                       @(Model != null && Model.OperationManage != null && Model.OperationManage.Equals("OperationManage") ? "checked" : "" )>
+                <label for="operation_manage" class="form-check-label">Operation Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="user_manage" type="checkbox" name="UserManage"
+                       class="form-check-input @(Model != null && Model.UserManage != null && Model.UserManage.Equals("UserManage") && ViewData.ModelState.IsValidField("UserManage") ? "is-valid" : "")"
+                       value="UserManage"
+                       @(Model != null && Model.UserManage != null && Model.UserManage.Equals("UserManage") ? "checked" : "" )>
+                <label for="user_manage" class="form-check-label">User Manage</label>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input id="permission_manage" type="checkbox" name="PermissionManage"
+                       class="form-check-input @(Model != null && Model.PermissionManage != null && Model.PermissionManage.Equals("PermissionManage") && ViewData.ModelState.IsValidField("PermissionManage") ? "is-valid" : "")"
+                       value="PermissionManage"
+                       @(Model != null && Model.PermissionManage != null && Model.PermissionManage.Equals("PermissionManage") ? "checked" : "" )>
+                <label for="permission_manage" class="form-check-label">Permission Manage</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row mb-3">
+        <div class="col-sm-9 offset-sm-3">
+            <button id="edit-permission-btn" type="submit" class="btn btn-success">Edit</button>
+        </div>
+    </div>
+</form>
