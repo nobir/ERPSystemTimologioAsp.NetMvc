@@ -51,7 +51,7 @@ namespace ERPSystemTimologio.Controllers
             var userId = ((User)Session["user"]).Id;
             var user = this.db.Users.Where(u => u.Id == userId).SingleOrDefault();
 
-            user.Avatar = user.Username.ToString() + "." + Path.GetExtension(Avatar.FileName).Substring(1);
+            user.Avatar = "avatar/" + user.Username.ToString() + "." + Path.GetExtension(Avatar.FileName).Substring(1);
 
             this.db.SaveChanges();
 
