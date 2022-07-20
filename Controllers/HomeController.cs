@@ -86,7 +86,7 @@ namespace ERPSystemTimologio.Controllers
                 var db = new TimologioEntities();
                 var sessionUserId = sessionUser.Id;
 
-                var db_working_hour = db.WorkingHours.Where(w => w.UserId == sessionUserId && w.ExitTime == null).SingleOrDefault();
+                var db_working_hour = db.WorkingHours.Where(w => w.UserId == sessionUserId && w.ExitTime == null).ToList().LastOrDefault();
 
                 if(db_working_hour != null)
                 {
