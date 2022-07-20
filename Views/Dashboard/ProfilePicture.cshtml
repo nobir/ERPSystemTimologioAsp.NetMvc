@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ProfilePicture";
+
+    ERPSystemTimologio.EF.User sessionUser = null;
+
+    if (Session["user"] != null)
+    {
+        sessionUser = (ERPSystemTimologio.EF.User)Session["user"];
+    }
+}
+
+<form action="@Url.Action("ProfilePicture", "Dashboard")" method="POST" enctype="multipart/form-data">
+    <div class="card text-center">
+        <div class="card-body">
+            <div class="row mb-3 has-validation">
+                <label for="avatar" class="col-sm-3 col-form-label">Avatar</label>
+                <div class="col-sm-9">
+                    <div class="custom-file">
+                        <input type="file"
+                               class="custom-file-input form-control @(!ViewData.ModelState.IsValidField("Avatar") ? "is-invalid" : "")" id="avatar"
+                               name="Avatar">
+                        <label class="custom-file-label" for="avatar">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-9 offset-sm-3">
+                    <button id="avatar-upload-btn" type="submit" class="btn btn-success">Upload</button>
+                </div>
+            </div>
+        </div>
+        @if (sessionUser != null && sessionUser.Avatar != null)
+        {
+            <div class="card-footer">
+                <img src="@Url.Content("~/Content/images/"+sessionUser.Avatar.ToString())" class="img-thumbnail rounded mx-auto d-block" alt="@sessionUser.Name">
+            </div>
+        }
+    </div>
+</form>
