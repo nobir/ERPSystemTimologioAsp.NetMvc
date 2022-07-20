@@ -156,6 +156,25 @@ namespace ERPSystemTimologio.Controllers
             return RedirectToAction("EditPermission", "Admin", new { id });
         }
 
+        public ActionResult DeletePermission(int? id)
+        {
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid Permission Id";
+                return RedirectToAction("ViewPermissions", "Admin");
+            }
+
+            var permission = this.db.Permissions.Where(p => p.Id == id).SingleOrDefault();
+
+            this.db.Permissions.Remove(permission);
+
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully deleted permission.";
+
+            return RedirectToAction("ViewPermissions", "Admin");
+        }
+
         public ActionResult VerifyUser(int id)
         {
             var user = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
