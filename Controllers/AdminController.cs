@@ -19,6 +19,30 @@ namespace ERPSystemTimologio.Controllers
             return View();
         }
 
+        public ActionResult ViewPermissions(int? id)
+        {
+            int perpage = 5;
+            int currentpage = id ?? 1;
+            var _permissions = this.db.Permissions.ToList();
+
+            var permissions = _permissions.Skip((currentpage - 1) * perpage).Take(perpage).ToList();
+            int maxpage = (int)Math.Ceiling(Convert.ToDouble(_permissions.Count()) / Convert.ToDouble(perpage));
+
+            ViewBag.Permissions = permissions;
+
+            if (currentpage < maxpage)
+            {
+                ViewBag.NextPageUrl = Url.Action("ViewPermissions", new { id = currentpage + 1 });
+            }
+
+            if (1 < currentpage)
+            {
+                ViewBag.PreviousPageUrl = Url.Action("ViewPermissions", new { id = currentpage - 1 });
+            }
+
+            return View();
+        }
+
         [HttpGet]
         public ActionResult CreatePermission()
         {

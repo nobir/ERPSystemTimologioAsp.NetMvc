@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "ViewPermission";
+}
+<div class="table-responsive w-100">
+    <table class="table table-success table-striped min-width-400px">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Permissions</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ERPSystemTimologio.EF.Permission permission in ViewBag.Permissions)
+            {
+                <tr>
+                    <td>@permission.Name</td>
+                    <td>
+                        @(permission.InvoiceAdd == 1 ? "Invoice Add, " : "")
+                        @(permission.InvoiceManage == 1 ? "Invoice Manage, " : "")
+                        @(permission.InventoryManage == 1 ? "Inventory Manage, " : "")
+                        @(permission.CategoryManage == 1 ? "Category Manage, " : "")
+                        @(permission.StationManage == 1 ? "Region/Branch Manage, " : "")
+                        @(permission.OperationManage == 1 ? "Operation Manage, " : "")
+                        @(permission.UserManage == 1 ? "User Manage, " : "")
+                        @(permission.PermissionManage == 1 ? "Permission Manage, " : "")
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditPermission", new { id = permission.Id })"
+                           class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("DeletePermission", new { id = permission.Id })" id="delete-btn"
+                           class="btn btn-danger delete-btn">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-4">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PreviousPageUrl != null)
+            {
+                <li class="page-item"><a class="page-link" href="@ViewBag.PreviousPageUrl">Previous</a></li>
+            }
+            @if (ViewBag.NextPageUrl != null)
+            {
+                <li class="page-item"><a class="page-link" href="@ViewBag.NextPageUrl">Next</a></li>
+            }
+        </ul>
+    </nav>
+</div>
