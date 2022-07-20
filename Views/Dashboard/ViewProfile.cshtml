@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "View Profile";
+
+    var user = (ERPSystemTimologio.EF.User) Session["user"];
+}
+<ul class="list-group list-group-flush">
+
+    <li class="list-group-item d-block">
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4 w-100">
+                <img src="@(user.Avatar != null ? Url.Content("~/Content/images/" + user.Avatar.ToString()) : Url.Content("~/Content/images/default-user-avatar.png"))" class="img-thumbnail rounded mx-auto d-block" alt="@user.Name">
+            </div>
+        </div>
+    </li>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Name</spna>
+            </div>
+            <div class="col-md-9">
+                <span class="text-dark">@user.Name</span>
+            </div>
+        </div>
+    </li>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Username</spna>
+            </div>
+            <div class="col-md-9">
+                <span class="text-dark">@user.Username</span>
+            </div>
+        </div>
+    </li>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Email</spna>
+            </div>
+            <div class="col-md-9">
+                <span class="text-dark">@user.Email</span>
+            </div>
+        </div>
+    </li>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Salary</spna>
+            </div>
+            <div class="col-md-9">
+                <span class="text-dark">@(Convert.ToDecimal(user.Salary).ToString("C"))</span>
+            </div>
+        </div>
+    </li>
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Post</spna>
+            </div>
+            <div class="col-md-9">
+                <span class="text-dark">@(user.Type == 0 ? "System Admin" : (user.Type == 1 ? "CEO" : (user.Type == 2 ? "Regional Manager" : (user.Type == 3 ? "Branch Manager" : (user.Type == 4 ? "Employee" : "")))))</span>
+            </div>
+        </div>
+    </li>
+
+    @if (user.Region != null || user.Branch != null)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">@(user.Region != null ? "Region" : (user.Branch != null ? "Branch" : "CEO"))</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@(user.Region != null ? user.Region.Name : (user.Branch != null ? user.Branch.Name : ""))</span>
+                </div>
+            </div>
+        </li>
+    }
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-3">
+                <spna class="text-dark">Permissions</spna>
+            </div>
+            <div class="col-md-9">
+                @foreach (var permission in user.Permissions)
+                {
+                    <span class="text-dark">@permission.Name, </span>
+                }
+            </div>
+        </div>
+    </li>
+
+    @if (user.Address.LocalAddress.ToString().Length != 0)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">Local Address</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@user.Address.LocalAddress</span>
+                </div>
+            </div>
+        </li>
+    }
+
+    @if (user.Address.PoliceStation.ToString().Length != 0)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">Police Station</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@user.Address.PoliceStation</span>
+                </div>
+            </div>
+        </li>
+    }
+
+    @if (user.Address.City.ToString().Length != 0)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">City</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@user.Address.City</span>
+                </div>
+            </div>
+        </li>
+    }
+
+    @if (user.Address.Country.ToString().Length != 0)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">Country</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@user.Address.Country</span>
+                </div>
+            </div>
+        </li>
+    }
+
+    @if (user.Address.ZipCode.ToString().Length != 0)
+    {
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    <spna class="text-dark">Zip Code</spna>
+                </div>
+                <div class="col-md-9">
+                    <span class="text-dark">@user.Address.ZipCode</span>
+                </div>
+            </div>
+        </li>
+    }
+
+</ul>
