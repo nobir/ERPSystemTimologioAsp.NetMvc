@@ -22,7 +22,7 @@
                     ERPSystemTimologio.EF.User _sessionUser = (ERPSystemTimologio.EF.User)(Session["user"]);
 
                     <div>
-                        <span class="text-white fs-6">Logged in <a href="#" class="badge badge-danger">@(_sessionUser.Username)</a> as @(_sessionUser.Type == 0 ? "System Admin" : (_sessionUser.Type == 1 ? "CEO" : (_sessionUser.Type == 2 ? "Regional Manager" : (_sessionUser.Type == 3 ? "Branch Manager" : (_sessionUser.Type == 4 ? "Employee" : "")))))</span>
+                        <span class="text-white fs-6">Logged in <a href="@Url.Action("ViewProfile", "Dashboard")" class="badge badge-danger">@(_sessionUser.Username)</a> as @(_sessionUser.Type == 0 ? "System Admin" : (_sessionUser.Type == 1 ? "CEO" : (_sessionUser.Type == 2 ? "Regional Manager" : (_sessionUser.Type == 3 ? "Branch Manager" : (_sessionUser.Type == 4 ? "Employee" : "")))))</span>
                     </div>
                 }
             </div>
