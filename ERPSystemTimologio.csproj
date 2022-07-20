@@ -194,6 +194,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PermissionCreateAdminModel.cs" />
     <Compile Include="Models\ProfilePicture.cs" />
     <Compile Include="Models\UniqueEmailValidation.cs" />
     <Compile Include="Models\UniqueUsernameValidation.cs" />
@@ -283,6 +284,7 @@
     <Content Include="Views\Admin\ViewUnverifiedUsers.cshtml" />
     <Content Include="Views\Dashboard\ViewProfile.cshtml" />
     <Content Include="Views\Dashboard\ProfilePicture.cshtml" />
+    <Content Include="Views\Admin\CreatePermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

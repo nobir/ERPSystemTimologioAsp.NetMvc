@@ -9,7 +9,7 @@ using ERPSystemTimologio.Models;
 
 namespace ERPSystemTimologio.Controllers
 {
-    //[LoggedIn, IsAdmin]
+    [LoggedIn, IsAdmin]
     public class AdminController : Controller
     {
         private readonly TimologioEntities db = new TimologioEntities();
@@ -17,6 +17,42 @@ namespace ERPSystemTimologio.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreatePermission()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePermission(PermissionCreateAdminModel _permission)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(_permission);
+            }
+
+            var permission = new Permission
+            {
+                Name = _permission.Name.ToString(),
+                InvoiceAdd = _permission.InvoiceAdd != null ? 1 : 0,
+                InvoiceManage = _permission.InvoiceManage != null ? 1 : 0,
+                InventoryManage = _permission.InventoryManage != null ? 1 : 0,
+                CategoryManage = _permission.CategoryManage != null ? 1 : 0,
+                StationManage = _permission.StationManage != null ? 1 : 0,
+                OperationManage = _permission.OperationManage != null ? 1 : 0,
+                UserManage = _permission.UserManage != null ? 1 : 0,
+                PermissionManage = _permission.PermissionManage != null ? 1 : 0,
+            };
+
+            this.db.Permissions.Add(permission);
+
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully created Permission";
+
+            return RedirectToAction("CreatePermission", "Admin");
         }
 
         public ActionResult VerifyUser(int id)
