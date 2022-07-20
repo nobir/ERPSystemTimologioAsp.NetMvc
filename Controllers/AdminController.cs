@@ -19,6 +19,44 @@ namespace ERPSystemTimologio.Controllers
             return View();
         }
 
+        public ActionResult VerifyUser(int id)
+        {
+            var user = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
+
+            if (user == null)
+            {
+                TempData["error_message"] = "User not found";
+                return RedirectToAction("ViewUnverifiedUsers", "Admin");
+            }
+
+            user.Verified = 1;
+
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully Verified the user";
+
+            return RedirectToAction("ViewUnverifiedUsers", "Admin");
+        }
+
+        public ActionResult UnverifyUser(int id)
+        {
+            var user = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
+
+            if (user == null)
+            {
+                TempData["error_message"] = "User not found";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            user.Verified = 0;
+
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully Unverified the user";
+
+            return RedirectToAction("ViewVerifiedUsers", "Admin");
+        }
+
         [HttpGet]
         public ActionResult ViewUnverifiedUsers(int? id)
         {
