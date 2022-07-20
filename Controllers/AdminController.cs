@@ -18,6 +18,122 @@ namespace ERPSystemTimologio.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ViewUnverifiedUsers(int? id)
+        {
+            int perpage = 5;
+            int currentpage = id ?? 1;
+            var _users = this.db.Users.Where(u => u.Verified == 0).ToList();
+
+            var users = _users.Skip((currentpage - 1) * perpage).Take(perpage).ToList();
+            int maxpage = (int)Math.Ceiling(Convert.ToDouble(_users.Count()) / Convert.ToDouble(perpage));
+
+            ViewBag.Users = users;
+
+            if (currentpage < maxpage)
+            {
+                ViewBag.NextPageUrl = Url.Action("ViewUnverifiedUsers", new { id = currentpage + 1 });
+            }
+
+            if (1 < currentpage)
+            {
+                ViewBag.PreviousPageUrl = Url.Action("ViewUnverifiedUsers", new { id = currentpage - 1 });
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ViewUnverifiedUsers(string SearchValue, string SearchBy)
+        {
+            List<User> users = null;
+
+            if (SearchValue.Trim().Length == 0)
+            {
+                TempData["error_message"] = "Enter search value";
+                ViewBag.Users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                return RedirectToAction("ViewUnverifiedUsers", "Admin");
+            }
+            else if (SearchBy == "Id")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Id.ToString().ToLower() == SearchValue.ToString().ToLower()) select user).ToList();
+            }
+            else if (SearchBy == "Username")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Username.ToString().ToLower() == SearchValue.ToString().ToLower()) select user).ToList();
+            }
+            else if (SearchBy == "Name")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Name.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "Email")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Name.ToString().ToLower() == SearchValue.ToString().ToLower()) select user).ToList();
+            }
+            else if (SearchBy == "LocalAddress")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Address.LocalAddress.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "PoliceStation")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Address.PoliceStation.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "City")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Address.City.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "ZipCode")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Address.ZipCode.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "Country")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Address.Country.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "Region")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Region != null && user.Region.Name.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "Branch")
+            {
+                users = this.db.Users.Where(u => u.Verified == 0).ToList();
+                users = (from user in users where (user.Branch != null && user.Branch.Name.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else if (SearchBy == "Permission")
+            {
+                users = (from user in this.db.Users.Where(u => u.Verified == 0).ToList() where user.Permissions.Any(p => p.Name.ToString().ToLower().Contains(SearchValue.ToString().ToLower())) select user).ToList();
+            }
+            else
+            {
+                users = this.db.Users.ToList();
+            }
+
+            if (users == null || users.Count() == 0)
+            {
+                TempData["error_message"] = "No users found";
+                return RedirectToAction("ViewUnverifiedUsers", "Admin");
+            }
+
+            //int perpage = 5;
+            //users = users.Skip((int)((id - 1) * perpage)).Take(perpage).ToList();
+
+            ViewBag.Users = users;
+            //ViewBag.NextPageUrl = Url.Action("ViewVerifiedUsers", new { id });
+
+            return View();
+        }
+
         [HttpGet]
         public ActionResult ViewVerifiedUsers(int? id)
         {

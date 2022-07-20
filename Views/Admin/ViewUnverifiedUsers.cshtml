@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "View Unverified Users";
+}
+
+<form action="@Url.Action("ViewUnverifiedUsers", "Admin")" method="post" class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control" name="SearchValue" placeholder="Search" value="">
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <select name="SearchBy" class="form-control">
+                <option value="Id">ID</option>
+                <option value="Name">Name</option>
+                <option value="Username">Username</option>
+                <option value="Email">Email</option>
+                <option value="LocalAddress">Local Address</option>
+                <option value="PoliceStation">Police Station</option>
+                <option value="City">City</option>
+                <option value="Country">Country</option>
+                <option value="ZipCode">Zip Code</option>
+                <option value="Country">Country</option>
+                <option value="Region">Region Name</option>
+                <option value="Branch">Branch Name</option>
+                <option value="Permission">Permission Name</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <input type="submit" value="Search" class="form-control btn btn-primary">
+        </div>
+    </div>
+</form>
+
+<div class="table-responsive w-100">
+    <table class="table table-success table-striped min-width-400px">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Salary</th>
+                <th>Hire Date</th>
+                <th>Address</th>
+                <th>Station Name</th>
+                <th>Permission Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ERPSystemTimologio.EF.User user in ViewBag.Users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Status</td>
+                    <td>@user.Salary</td>
+                    <td>@(Convert.ToDateTime(user.HireDate).ToShortDateString().ToString())</td>
+                    <td>@user.Address.LocalAddress, @user.Address.PoliceStation, @user.Address.City, @user.Address.Country, @user.Address.ZipCode</td>
+                    <td>@(user.Branch != null ? user.Branch.Name.ToString() : (user.Region != null ? user.Region.Name.ToString() : ""))</td>
+                    <td>
+                        @foreach (ERPSystemTimologio.EF.Permission permission in user.Permissions)
+                        {@(permission.Name.ToString() + ", ")}
+                    </td>
+                    <td>
+                        @Html.ActionLink("Verify", "VerifyUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "EditUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "DeleteUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-danger delete-btn", @id = "delete-btn" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="d-flex justify-content-center align-items-center mt-4">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (ViewBag.PreviousPageUrl != null)
+            {
+                <li class="page-item"><a class="page-link" href="@ViewBag.PreviousPageUrl">Previous</a></li>
+            }
+            @if (ViewBag.NextPageUrl != null)
+            {
+                <li class="page-item"><a class="page-link" href="@ViewBag.NextPageUrl">Next</a></li>
+            }
+        </ul>
+    </nav>
+</div>
