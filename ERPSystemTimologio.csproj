@@ -200,6 +200,7 @@
     <Compile Include="Models\UniqueEmailValidation.cs" />
     <Compile Include="Models\UniqueUsernameValidation.cs" />
     <Compile Include="Models\UserCreateAdminModel.cs" />
+    <Compile Include="Models\UserEditAdminModel.cs" />
     <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -288,6 +289,7 @@
     <Content Include="Views\Admin\CreatePermission.cshtml" />
     <Content Include="Views\Admin\EditPermission.cshtml" />
     <Content Include="Views\Admin\ViewPermissions.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

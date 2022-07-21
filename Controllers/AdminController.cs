@@ -9,7 +9,7 @@ using ERPSystemTimologio.Models;
 
 namespace ERPSystemTimologio.Controllers
 {
-    //[LoggedIn, IsAdmin]
+    [LoggedIn, IsAdmin]
     public class AdminController : Controller
     {
         private readonly TimologioEntities db = new TimologioEntities();
@@ -538,6 +538,156 @@ namespace ERPSystemTimologio.Controllers
             TempData["success_message"] = "Successfully created user";
 
             return RedirectToAction("CreateUser", "Admin");
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(int? id)
+        {
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid User Id get";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            var user = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
+
+            if(user == null)
+            {
+                TempData["error_message"] = "User not found";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            ViewBag.Branches = this.db.Branches.ToList();
+            ViewBag.Regions = this.db.Regions.ToList();
+            ViewBag.Permissions = this.db.Permissions.ToList();
+
+            List<int> _permissionIds = new List<int> { };
+
+            foreach(var permission in user.Permissions.ToList())
+            {
+                _permissionIds.Add(permission.Id);
+            }
+
+            var _user = new UserEditAdminModel
+            {
+                Id = user.Id,
+                Verified = user.Verified,
+                Name = user.Name,
+                Username = user.Username,
+                Email = user.Email,
+                Salary = user.Salary,
+                HireDate = user.HireDate,
+                Type = user.Type,
+                RegionId = user.RegionId,
+                BranchId = user.BranchId,
+                LocalAddress = user.Address.LocalAddress,
+                PoliceStation = user.Address.PoliceStation,
+                City = user.Address.City,
+                Country = user.Address.Country,
+                ZipCode = user.Address.ZipCode,
+                PermissionIds = _permissionIds ?? new List<int> { },
+            };
+
+            return View(_user);
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(UserEditAdminModel editedUser, int? id)
+        {
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid User Id post";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            var dbUser = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
+
+            if (dbUser == null)
+            {
+                TempData["error_message"] = "User not found";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            ViewBag.Branches = this.db.Branches.ToList();
+            ViewBag.Regions = this.db.Regions.ToList();
+            ViewBag.Permissions = this.db.Permissions.ToList();
+
+            if (!ModelState.IsValid)
+            {
+                return View(editedUser);
+            }
+
+            if (editedUser.PermissionIds.Count() > 0)
+            {
+                editedUser.PermissionIds.RemoveAll(n => n == 0);
+                editedUser.PermissionIds = editedUser.PermissionIds.Distinct().ToList();
+            }
+
+            dbUser.Verified = editedUser.Verified;
+            dbUser.Name = editedUser.Name;
+            dbUser.Salary = editedUser.Salary;
+            dbUser.Type = editedUser.Type;
+            dbUser.HireDate = editedUser.HireDate;
+            dbUser.RegionId = null;
+            dbUser.BranchId = null;
+
+            db.SaveChanges();
+
+            if (editedUser.RegionId != null && editedUser.BranchId == null)
+            {
+                if (db.Regions.Where(r => r.Id == editedUser.RegionId).Count() == 0)
+                {
+                    TempData["error_message"] = "Region not found";
+                    return RedirectToAction("EditUser", "Admin", new { id });
+                }
+
+                dbUser.RegionId = editedUser.RegionId;
+                db.SaveChanges();
+            }
+            else if (editedUser.BranchId != null)
+            {
+                if (db.Branches.Where(b => b.Id == editedUser.BranchId).Count() == 0)
+                {
+                    TempData["error_message"] = "Branch not found";
+                    return RedirectToAction("EditUser", "Admin", new { id });
+                }
+
+                dbUser.BranchId = editedUser.BranchId;
+                db.SaveChanges();
+            }
+
+            editedUser.RegionId = dbUser.RegionId;
+            editedUser.BranchId = dbUser.BranchId;
+
+            db.SaveChanges();
+
+            dbUser.Address.LocalAddress = editedUser.LocalAddress;
+            dbUser.Address.PoliceStation = editedUser.PoliceStation;
+            dbUser.Address.City = editedUser.City;
+            dbUser.Address.Country = editedUser.Country;
+            dbUser.Address.ZipCode = editedUser.ZipCode;
+
+            db.SaveChanges();
+
+            dbUser.Permissions.Clear();
+
+            db.SaveChanges();
+
+            for (var i = 0; i < editedUser.PermissionIds.Count(); ++i)
+            {
+                var pid = editedUser.PermissionIds[i];
+                var permission = this.db.Permissions.Where(p => p.Id == pid).SingleOrDefault();
+
+                this.db.Permissions.Attach(permission);
+                dbUser.Permissions.Add(permission);
+                db.SaveChanges();
+            }
+
+            db.SaveChanges();
+
+            TempData["success_message"] = "Successfully updated user";
+
+            return View(editedUser);
         }
     }
 }
