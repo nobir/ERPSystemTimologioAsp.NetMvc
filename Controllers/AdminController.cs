@@ -80,13 +80,13 @@ namespace ERPSystemTimologio.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditPermission(int id)
+        public ActionResult EditPermission(int? id)
         {
-            //if(id != null)
-            //{
-            //    TempData["error_message"] = "Invalid Permission Id";
-            //    return RedirectToAction("ViewPermissions", "Admin");
-            //}
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid Permission Id";
+                return RedirectToAction("ViewPermissions", "Admin");
+            }
 
             var permission = db.Permissions.Where(p => p.Id == id).SingleOrDefault();
 
@@ -115,13 +115,13 @@ namespace ERPSystemTimologio.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPermission(PermissionEditAdminModel _permission, int id)
+        public ActionResult EditPermission(PermissionEditAdminModel _permission, int? id)
         {
-            //if (id != null)
-            //{
-            //    TempData["error_message"] = "Invalid Permission Id";
-            //    return RedirectToAction("ViewPermissions", "Admin");
-            //}
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid Permission Id";
+                return RedirectToAction("ViewPermissions", "Admin");
+            }
 
             if (!ModelState.IsValid)
             {
