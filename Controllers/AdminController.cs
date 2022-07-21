@@ -689,5 +689,27 @@ namespace ERPSystemTimologio.Controllers
 
             return View(editedUser);
         }
+        public ActionResult DeleteUser(int? id)
+        {
+            if (id == null)
+            {
+                TempData["error_message"] = "Invalid User Id";
+                return RedirectToAction("ViewVerifiedUsers", "Admin");
+            }
+
+            var user = this.db.Users.Where(u => u.Id == id).SingleOrDefault();
+
+            user.Permissions.Clear();
+            user.RegionId = null;
+            user.BranchId = null;
+            this.db.SaveChanges();
+            this.db.Users.Remove(user);
+            this.db.SaveChanges();
+
+            TempData["success_message"] = "Successfully deleted user.";
+
+            return RedirectToAction("ViewVerifiedUsers", "Admin");
+        }
+
     }
 }
