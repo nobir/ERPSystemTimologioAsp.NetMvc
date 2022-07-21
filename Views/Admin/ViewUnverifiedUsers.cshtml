@@ -68,9 +68,9 @@
                         {@(permission.Name.ToString() + ", ")}
                     </td>
                     <td>
-                        @Html.ActionLink("Verify", "VerifyUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Edit", "EditUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Delete", "DeleteUser", "Admin", new { Id = user.Id }, new { @class = "btn btn-danger delete-btn", @id = "delete-btn" })
+                        @Html.ActionLink("Verify", "VerifyUser", "Admin", new { id = user.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "EditUser", "Admin", new { id = user.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "DeleteUser", "Admin", new { id = user.Id }, new { @class = "btn btn-danger delete-btn", @id = "delete-btn" })
                     </td>
                 </tr>
             }
