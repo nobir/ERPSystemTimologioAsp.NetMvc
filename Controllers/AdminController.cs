@@ -593,7 +593,7 @@ namespace ERPSystemTimologio.Controllers
 
         [HttpPost]
         public ActionResult EditUser(UserEditAdminModel editedUser, int? id)
-        {
+        {//return Redirect(Request.UrlReferrer.ToString());
             if (id == null)
             {
                 TempData["error_message"] = "Invalid User Id post";
@@ -703,6 +703,15 @@ namespace ERPSystemTimologio.Controllers
             user.RegionId = null;
             user.BranchId = null;
             this.db.SaveChanges();
+
+            var addressId = user.AddressId;
+            var address = this.db.Addresses.Where(a => a.Id == addressId).SingleOrDefault();
+            user.AddressId = null;
+            this.db.SaveChanges();
+
+            this.db.Addresses.Remove(address);
+            this.db.SaveChanges();
+
             this.db.Users.Remove(user);
             this.db.SaveChanges();
 

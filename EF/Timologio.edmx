@@ -139,7 +139,7 @@
           <Property Name="Salary" Type="float" />
           <Property Name="HireDate" Type="date" />
           <Property Name="Avatar" Type="varchar" MaxLength="255" />
-          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="AddressId" Type="int" />
           <Property Name="RegionId" Type="int" />
           <Property Name="BranchId" Type="int" />
         </EntityType>
@@ -317,7 +317,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Addresses">
-          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Addresses">
@@ -621,7 +621,7 @@
           <Property Name="Salary" Type="Double" />
           <Property Name="HireDate" Type="DateTime" Precision="0" />
           <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="AddressId" Type="Int32" />
           <Property Name="RegionId" Type="Int32" />
           <Property Name="BranchId" Type="Int32" />
           <NavigationProperty Name="Address" Relationship="Self.FK_Users_Addresses" FromRole="Users" ToRole="Addresses" />
@@ -691,7 +691,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Addresses">
-          <End Role="Addresses" Type="Self.Address" Multiplicity="1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Addresses">

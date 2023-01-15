@@ -11,8 +11,7 @@ namespace ERPSystemTimologio.EF
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -38,7 +37,7 @@ namespace ERPSystemTimologio.EF
         public Nullable<double> Salary { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
         public string Avatar { get; set; }
-        public int AddressId { get; set; }
+        public Nullable<int> AddressId { get; set; }
         public Nullable<int> RegionId { get; set; }
         public Nullable<int> BranchId { get; set; }
     

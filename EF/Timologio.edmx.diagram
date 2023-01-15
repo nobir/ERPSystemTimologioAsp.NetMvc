@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f576c77951ac4e4f98dce14ebc2316b4" Name="Diagram1">
+      <Diagram DiagramId="494265001b1840b39896a7948dff0b17" Name="Diagram1">
         <EntityTypeShape EntityType="TimologioModel.Address" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TimologioModel.Branch" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TimologioModel.Category" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
